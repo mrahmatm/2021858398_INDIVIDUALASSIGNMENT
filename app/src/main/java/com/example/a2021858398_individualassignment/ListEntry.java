@@ -68,7 +68,7 @@ public class ListEntry extends AppCompatActivity {
             LV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    showToast("Meow");
+                    showToast("Data Loaded!");
                     Entry currentTarget = (Entry) parent.getItemAtPosition(position);
 
                     //onBackPressed();

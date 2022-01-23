@@ -35,8 +35,6 @@ public class MainActivity extends AppCompatActivity {
     double BMIResult;
     private static final String fileName = "entry.txt";
 
-    private static final String TAG = MainActivity.class.getName();
-
     DatabaseHelper DBH;
 
     //a function to insert data into the db
@@ -121,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
         viewEntry = (Button) findViewById(R.id.btnViewEntries);
         load = (Button)findViewById(R.id.btnLoad);
 
+        //sqlite helper
         DBH = new DatabaseHelper(this);
 
         //click event listener go btnCalc
@@ -136,7 +135,6 @@ public class MainActivity extends AppCompatActivity {
                     healthRisk.setText(getRisk(BMIResult));
 
                     insertData(Double.parseDouble(weight.getText().toString()), Double.parseDouble(height.getText().toString()), BMIResult);
-                    Log.d(TAG, "Data inserted!");
                 }else{
                     //if either one of both is null, display a toast
                     showToast("Please enter both fields!");
@@ -144,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //invoke intent to ListEntry class
         viewEntry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -152,17 +151,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //load data from the ID input
         load.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(inputID.getText().toString().isEmpty())
+                //check wheter the edittext is empty
+                if(String.valueOf(inputID.getText()).isEmpty()){
+                    //if so, display toast
                     showToast("Please enter the ID!");
-                else{
+                } else{
+                    //else, proceed with data fetching attempt from db
                     Cursor target = DBH.loadID((inputID.getText().toString()));
                     target.moveToFirst();
+                    //check whether the data exists or not
                     if(target == null || target.getCount() <= 0)
+                        //if it doesn't exist, display toast
                         showToast("ID not found!");
                     else {
+                        //else, load the data into edittext's and textview's
                         weight.setText(String.valueOf(target.getDouble(1)));
                         height.setText(String.valueOf(target.getDouble(2)));
                         BMI.setText(String.format("%.2f", target.getDouble(3)));
@@ -174,9 +180,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //data passing from ListEntry class when a row is clicked
         Bundle extras = getIntent().getExtras();
+        //check whether data is passed
         if (extras != null) {
-            
+            //if so, set all the edittext's and textview's based on values retrieved
             weight.setText(extras.getString("weight"));
             height.setText(extras.getString("height"));
             BMI.setText(String.format("%.2f", Double.parseDouble(extras.getString("BMI"))));

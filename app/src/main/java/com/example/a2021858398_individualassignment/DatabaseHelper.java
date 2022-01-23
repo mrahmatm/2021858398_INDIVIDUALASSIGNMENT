@@ -9,6 +9,7 @@ import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
+    //table's information
     private static final String TAG = "DatabaseHelper";
     private static final String table = "entry";
     private static final String PK = "ID";
@@ -26,12 +27,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    //create table when non-existent
     @Override
     public void onCreate(SQLiteDatabase db){
         db.execSQL("CREATE TABLE " + table + " (" + PK + " INTEGER PRIMARY KEY AUTOINCREMENT, " + column1 + " DOUBLE, "
                 + column2 + " DOUBLE, " + column3 + " DOUBLE)");
     }
 
+    //insert a row from parameters given
     public Boolean insertRow(String weightData, String heightData, String BMIData){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -52,6 +55,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return  true;
     }
 
+    //get all data
     public Cursor getData(){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + table;
@@ -59,6 +63,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return data;
     }
 
+    //get row from an ID
     public Cursor loadID(String input){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + table + " WHERE " + PK + " = " + input;
@@ -66,9 +71,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return data;
     }
 
+    //function to wipe the db and reset the PK's auto increment value
     public void wipeDB(){
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "DELETE * FROM ";
-        db.execSQL(query + table);
+        //delete all row
+        String query = "DELETE FROM " + table;
+        db.execSQL(query);
+        //delete sequence/reset increment
+        query = "DELETE FROM sqlite_sequence WHERE name = '" + table + "'";
+        db.execSQL(query);
+    }
+
+    //function to delete a row from given ID
+    public void deleteRow(String input){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "DELETE FROM " + table + " WHERE " + PK + " = " + input;
+        db.execSQL(query);
     }
 }

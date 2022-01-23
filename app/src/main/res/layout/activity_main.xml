@@ -128,7 +128,8 @@
                     android:layout_gravity="center"
                     android:width="600px"
                     android:padding="15dp"
-                    android:text="GO" />
+                    android:text="GO"
+                    android:drawableLeft="@drawable/go_arrow"/>
 
                 <Button
                     android:id="@+id/btnViewEntries"
@@ -137,7 +138,8 @@
                     android:layout_gravity="center"
                     android:width="600px"
                     android:padding="15dp"
-                    android:text="History" />
+                    android:text="History"
+                    android:drawableLeft="@drawable/history"/>
 
                 <EditText
                     android:id="@+id/txtID"
@@ -158,7 +160,8 @@
                     android:layout_gravity="center"
                     android:width="600px"
                     android:padding="15dp"
-                    android:text="LOAD" />
+                    android:text="LOAD"
+                    android:drawableLeft="@drawable/search"/>
 
 
             </LinearLayout>

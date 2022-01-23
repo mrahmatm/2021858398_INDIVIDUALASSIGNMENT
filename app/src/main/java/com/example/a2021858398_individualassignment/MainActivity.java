@@ -12,12 +12,18 @@ TITLE: INDIVIDUAL ASSIGNMENT - BMI CALCULATOR
 
 package com.example.a2021858398_individualassignment;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -190,6 +196,53 @@ public class MainActivity extends AppCompatActivity {
             BMI.setText(String.format("%.2f", Double.parseDouble(extras.getString("BMI"))));
             category.setText(getCategory(Double.parseDouble(extras.getString("BMI"))));
             healthRisk.setText(getRisk(Double.parseDouble(extras.getString("BMI"))));
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inf = getMenuInflater();
+        inf.inflate(R.menu.about_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch(item.getItemId()){
+            case R.id.option1:
+                Intent i = new Intent(MainActivity.this, About.class);
+                startActivity(i);
+                return true;
+
+            case R.id.option2:
+                //showToast("Select Item 2!");
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setCancelable(true);
+                builder.setTitle("Wipe All Entries");
+                builder.setMessage("Are you sure? Upon clicking Confirm, all data will be lost.");
+                builder.setPositiveButton("Confirm",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                DBH = new DatabaseHelper(MainActivity.this);
+                                DBH.wipeDB();
+                            }
+                        });
+                builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }

@@ -1,5 +1,7 @@
 package com.example.a2021858398_individualassignment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -79,6 +81,42 @@ public class ListEntry extends AppCompatActivity {
                     i.putExtra("BMI", String.valueOf(currentTarget.getBMI()));
 
                     startActivity(i);
+                }
+            });
+
+            LV.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    Entry currentTarget = (Entry) parent.getItemAtPosition(position);
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ListEntry.this);
+                    builder.setCancelable(true);
+                    builder.setTitle("Delete Item");
+                    builder.setMessage("Delete Item (ID: " + String.valueOf(currentTarget.getID()) + ")?");
+                    builder.setPositiveButton("Confirm",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    DBH = new DatabaseHelper(ListEntry.this);
+
+                                    DBH.deleteRow(String.valueOf(currentTarget.getID()));
+                                    showToast("Deleted!");
+
+                                    finish();
+                                    startActivity(getIntent());
+                                }
+                            });
+                    builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+
+                    return false;
                 }
             });
 

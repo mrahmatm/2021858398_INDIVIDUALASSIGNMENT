@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:paddingBottom="40dp">
+
+                <EditText
+                    android:id="@+id/txtWeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/border_blue"
+                    android:ems="10"
+                    android:hint="Weight"
+                    android:inputType="numberDecimal"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"/>
+
+                <TextView
+                    android:layout_width="25sp"
+                    android:layout_height="50sp"
+                    android:layout_weight="1"
+                    android:text="KG"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="25sp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginLeft="20dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:paddingBottom="40dp">
+
+                <EditText
+                    android:id="@+id/txtHeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/border_blue"
+                    android:ems="10"
+                    android:hint="Height"
+                    android:inputType="numberDecimal"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"/>
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="25sp"
+                    android:layout_height="50sp"
+                    android:layout_weight="1"
+                    android:text="M"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="25sp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginLeft="20dp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtBMI"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/border_red"
+                    android:padding="25dp"
+                    android:text="BMI"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/txtCategory"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/border_red"
+                    android:padding="25dp"
+                    android:text="Category"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/txtHealthRisk"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/border_red"
+                    android:padding="25dp"
+                    android:text="Health Risks"
+                    android:textAlignment="center" />
+
+                <Button
+                    android:id="@+id/btnCalc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:width="600px"
+                    android:padding="15dp"
+                    android:text="GO" />
+
+                <Button
+                    android:id="@+id/btnViewEntries"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:width="600px"
+                    android:padding="15dp"
+                    android:text="History" />
+
+                <EditText
+                    android:id="@+id/txtID"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/border_blue"
+                    android:padding="25dp"
+                    android:hint="Enter ID to load"
+                    android:textAlignment="center"
+                    android:inputType="number"/>
+
+                <Button
+                    android:id="@+id/btnLoad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:width="600px"
+                    android:padding="15dp"
+                    android:text="LOAD" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

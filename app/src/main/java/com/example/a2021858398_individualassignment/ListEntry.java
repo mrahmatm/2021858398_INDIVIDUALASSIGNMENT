@@ -67,23 +67,6 @@ public class ListEntry extends AppCompatActivity {
             LV = (ListView)findViewById(R.id.listview);
             LV.setAdapter(adapter);
 
-            LV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    showToast("Data Loaded!");
-                    Entry currentTarget = (Entry) parent.getItemAtPosition(position);
-
-                    //onBackPressed();
-                    Intent i = new Intent(ListEntry.this, MainActivity.class);
-
-                    i.putExtra("weight", String.valueOf(currentTarget.getWeight()));
-                    i.putExtra("height", String.valueOf(currentTarget.getHeight()));
-                    i.putExtra("BMI", String.valueOf(currentTarget.getBMI()));
-
-                    startActivity(i);
-                }
-            });
-
             LV.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
                 @Override
                 public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -92,14 +75,13 @@ public class ListEntry extends AppCompatActivity {
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(ListEntry.this);
                     builder.setCancelable(true);
-                    builder.setTitle("Delete Item");
-                    builder.setMessage("Delete Item (ID: " + String.valueOf(currentTarget.getID()) + ")?");
-                    builder.setPositiveButton("Confirm",
+                    builder.setTitle("Item Options");
+                    builder.setMessage("What would you like to do? (ID: " + String.valueOf(currentTarget.getID()) + ")");
+                    builder.setPositiveButton("Delete",
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     DBH = new DatabaseHelper(ListEntry.this);
-
                                     DBH.deleteRow(String.valueOf(currentTarget.getID()));
                                     showToast("Deleted!");
 
@@ -107,9 +89,20 @@ public class ListEntry extends AppCompatActivity {
                                     startActivity(getIntent());
                                 }
                             });
-                    builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                    builder.setNegativeButton("Load", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            showToast("Data Loaded!");
+                            Entry currentTarget = (Entry) parent.getItemAtPosition(position);
+                            Log.d("CLICK", "CLICKED ON A ROW");
+                            //onBackPressed();
+                            Intent i = new Intent(ListEntry.this, MainActivity.class);
+
+                            i.putExtra("weight", String.valueOf(currentTarget.getWeight()));
+                            i.putExtra("height", String.valueOf(currentTarget.getHeight()));
+                            i.putExtra("BMI", String.valueOf(currentTarget.getBMI()));
+
+                            startActivity(i);
                         }
                     });
 
